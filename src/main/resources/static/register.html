@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register to Free Pass</title>
+
+    <link href="register_style.css" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Register to FreePass</h2>
+                    <form id="register_form" >
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">first name</label>
+                                    <input class="input--style-4" type="text" id="first_name">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">last name</label>
+                                    <input class="input--style-4" type="text" id="last_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="email" id="email">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Phone Number</label>
+                                    <input class="input--style-4" type="text" id="phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Social Security Number</label>
+                                    <input class="input--style-4" type="text" id="ssn">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Password</label>
+                                    <input class="input--style-4" type="text" id="password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            <button id="submit_button" class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let register_form = document.getElementById("register_form");
+        register_form.addEventListener("submit", (event)=>{
+
+            event.preventDefault();
+            console.log("Post form submitted");
+
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            let first_name = document.getElementById("first_name").value;
+            let last_name = document.getElementById("last_name").value;
+            let full_name = first_name;
+            let password = document.getElementById("password").value;
+            let ssn = document.getElementById("ssn").value;
+            let phone = document.getElementById("phone").value;
+            let email = document.getElementById("email").value;
+
+
+            let data =
+            [
+                {
+                    "userName": first_name + " " + last_name,
+                    "password": password,
+                    "roles": "ROLE_CITIZEN",
+                }
+            ]
+            const options = {
+                    method: `POST`,
+                    headers: myHeaders,
+                    body: JSON.stringify(data)
+                };
+
+            fetch("http://localhost:8080/saveUser",options).then(data => {
+                if (!data.ok) {
+                    throw data;
+                }  
+            });
+            register_form.reset();
+        });
+    </script>
+</body>
+
+</html>
