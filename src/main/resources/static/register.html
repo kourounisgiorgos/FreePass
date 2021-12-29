@@ -77,14 +77,11 @@
 
             let first_name = document.getElementById("first_name").value;
             let last_name = document.getElementById("last_name").value;
-            let full_name = first_name;
             let password = document.getElementById("password").value;
-            let ssn = document.getElementById("ssn").value;
-            let phone = document.getElementById("phone").value;
-            let email = document.getElementById("email").value;
+            
 
 
-            let data =
+            let user_data =
             [
                 {
                     "userName": first_name + " " + last_name,
@@ -95,10 +92,35 @@
             const options = {
                     method: `POST`,
                     headers: myHeaders,
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(user_data)
                 };
 
             fetch("http://localhost:8080/saveUser",options).then(data => {
+                if (!data.ok) {
+                    throw data;
+                }  
+            });
+
+            let ssn = document.getElementById("ssn").value;
+            let phone = document.getElementById("phone").value;
+            let email = document.getElementById("email").value;
+
+            let citizen_data =
+            [
+                {
+                    "userName": first_name + " " + last_name,
+                    "ssn":ssn,
+                    "email": email,
+                    "phoneNumber": phone
+                }
+            ]
+            const citizen_options = {
+                    method: `POST`,
+                    headers: myHeaders,
+                    body: JSON.stringify(citizen_data)
+                };
+
+            fetch("http://localhost:8080/saveCitizen",citizen_options).then(data => {
                 if (!data.ok) {
                     throw data;
                 }  

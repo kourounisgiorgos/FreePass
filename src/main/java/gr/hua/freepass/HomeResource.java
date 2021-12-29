@@ -15,7 +15,7 @@ public class HomeResource {
 
     @RequestMapping("/citizen")
     public String citizen() {
-        return ("<h1>Welcome User</h1>");
+        return ("oaed_page.html");
     }
 
     @RequestMapping("/oaed")
