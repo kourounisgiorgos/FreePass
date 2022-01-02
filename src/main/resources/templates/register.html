@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Register to Free Pass</title>
-
-    <link href="register_style.css" rel="stylesheet" media="all">
+    <base href="/">
+    <link href="register_style.css" type="text/css" rel="stylesheet" media="all">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">Register to FreePass</h2>
-                    <form id="register_form" >
+                    <form id="register_form">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -89,6 +89,7 @@
                     "roles": "ROLE_CITIZEN",
                 }
             ]
+            
             const options = {
                     method: `POST`,
                     headers: myHeaders,
@@ -127,6 +128,12 @@
             });
             register_form.reset();
         });
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("submit_button").onclick = function () {
+            location.href = window.location.protocol + "//" + window.location.host + "/citizen";
+        };
     </script>
 </body>
 

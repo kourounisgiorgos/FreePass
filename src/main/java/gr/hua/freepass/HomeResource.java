@@ -13,7 +13,7 @@ public class HomeResource {
         return ("register.html");
     }
 
-    @RequestMapping("/citizen")
+    @GetMapping("/citizen")
     public String citizen() {
         return ("oaed_page.html");
     }
