@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Your Application</title>
+    <link href="register_style.css" type="text/css" rel="stylesheet" media="all">
+</head>
+
+<body>
+<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <div class="card-body">
+                <h2 class="title">User Profile</h2>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <u class="label">Full Name</u>
+                            <input type="text" id="full_name" th:value="${citizen.userName}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <u class="label">Unemployed Since</u>
+                            <input type="text" id="unemployed" th:value="${citizen.unemployedSince}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <u class="label">Email Address</u>
+                            <input type="text" id="email" th:value="${citizen.email}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <u class="label">Phone Number</u>
+                            <input type="text" id="phone_number" th:value="${citizen.phoneNumber}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <u class="label">Social Security Number</u>
+                            <input type="text" id="ssn" th:value="${citizen.ssn}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-t-15">
+                    <button id="submit_button" class="btn btn--radius-2 btn--blue" type="button">Submit Application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var submit_button = document.getElementById("submit_button");
+    submit_button.addEventListener("click", (event)=>{
+
+        event.preventDefault();
+        console.log("Post form submitted");
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let full_name = document.getElementById("full_name").value;
+
+        let app_data =
+            [
+                {
+                    "userName": full_name,
+                    "isVerified": "false"
+                }
+            ]
+
+        const options = {
+            method: `POST`,
+            headers: myHeaders,
+            body: JSON.stringify(app_data)
+        };
+
+        fetch("http://localhost:8080/saveApplication",options).then(data => {
+            if (!data.ok) {
+                alert("You have already submitted your application");
+                throw data;
+            }else{
+                alert("Succesfully submitted application!");
+            }
+        });
+    });
+</script>
+</body>
+</html>

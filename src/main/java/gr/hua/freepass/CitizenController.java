@@ -3,7 +3,6 @@ package gr.hua.freepass;
 import gr.hua.freepass.models.Citizen;
 import gr.hua.freepass.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,6 +1,7 @@
 package gr.hua.freepass.models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Citizen")
@@ -10,6 +11,7 @@ public class Citizen {
     private String ssn;
     private String email;
     private String phoneNumber;
+    private Date unemployedSince;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +27,14 @@ public class Citizen {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getUnemployedSince() {
+        return unemployedSince;
+    }
+
+    public void setUnemployedSince(Date unemployedSince) {
+        this.unemployedSince = unemployedSince;
     }
 
     public void setId(int id) {
