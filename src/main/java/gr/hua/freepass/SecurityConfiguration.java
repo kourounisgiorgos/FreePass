@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/oaed").hasRole("OAED")
                 .antMatchers("/citizen").hasRole("CITIZEN")
                 .antMatchers("/oasa").hasRole("OASA")
+                .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .and().formLogin();
     }

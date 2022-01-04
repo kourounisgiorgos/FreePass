@@ -32,6 +32,11 @@ public class HomeResource {
         return ("citizen_page");
     }
 
+    @RequestMapping("/admin")
+    public String admin(){
+        return("admin_page");
+    }
+
     @RequestMapping("/oaed")
     public String oaed() {
         return ("oaed_page.html");

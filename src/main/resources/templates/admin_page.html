@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+
+    <link href="register_style.css" rel="stylesheet" media="all">
+</head>
+
+<body>
+<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <div class="card-body">
+                <h2 class="title">Admin Dashboard</h2>
+                <form id="register_form">
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Username</label>
+                                <input class="input--style-4" type="text" id="user_name">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Password</label>
+                                <input class="input--style-4" type="text" id="password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="p-t-15">
+                            <button id="oasa_button" class="btn btn--radius-2 btn--blue" type="button">Add OASA Employee</button>
+                        </div>
+                        <div class="p-t-15">
+                            <button id="oaed_button" class="btn btn--radius-2 btn--blue" type="button">Add OAED Employee</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var oasa_button = document.getElementById("oasa_button");
+    var oaed_button = document.getElementById("oaed_button");
+
+
+
+    oasa_button.addEventListener("click", (event)=>{
+        event.preventDefault();
+        console.log("Post form submitted");
+
+        let user_name = document.getElementById("user_name").value;
+        let password = document.getElementById("password").value;
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let user_data =
+            [
+                {
+                    "userName": user_name,
+                    "password": password,
+                    "roles": "ROLE_OASA",
+                }
+            ]
+
+        const options = {
+            method: `POST`,
+            headers: myHeaders,
+            body: JSON.stringify(user_data)
+        };
+
+        fetch("http://localhost:8080/saveUser",options).then(data => {
+            if (!data.ok) {
+                alert("User is already exists")
+                throw data;
+            }
+        });
+    });
+
+    oaed_button.addEventListener("click", (event)=>{
+        event.preventDefault();
+        console.log("Post form submitted");
+
+        let user_name = document.getElementById("user_name").value;
+        let password = document.getElementById("password").value;
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let user_data =
+            [
+                {
+                    "userName": user_name,
+                    "password": password,
+                    "roles": "ROLE_OAED",
+                }
+            ]
+
+        const options = {
+            method: `POST`,
+            headers: myHeaders,
+            body: JSON.stringify(user_data)
+        };
+
+        fetch("http://localhost:8080/saveUser",options).then(data => {
+            if (!data.ok) {
+                alert("User is already exists")
+                throw data;
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

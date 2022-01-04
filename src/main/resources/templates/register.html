@@ -61,7 +61,7 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Unemployed Since</label>
-                                <input class="input--style-3" type="date" id="unemployed" value="2022-01-01">
+                                <input class="input--style-4" type="date" id="unemployed" value="2022-01-01">
                             </div>
                         </div>
                         <div class="p-t-15">
@@ -88,7 +88,10 @@
         let first_name = document.getElementById("first_name").value;
         let last_name = document.getElementById("last_name").value;
         let password = document.getElementById("password").value;
-
+        let ssn = document.getElementById("ssn").value;
+        let phone = document.getElementById("phone").value;
+        let email = document.getElementById("email").value;
+        let date = document.getElementById("unemployed").value;
 
 
         let user_data =
@@ -108,44 +111,38 @@
 
         fetch("http://localhost:8080/saveUser",options).then(data => {
             if (!data.ok) {
+                alert("You have already registered")
                 throw data;
-            }
-        });
+            }else{
 
-        let ssn = document.getElementById("ssn").value;
-        let phone = document.getElementById("phone").value;
-        let email = document.getElementById("email").value;
+                let citizen_data =
+                    [
+                        {
+                            "userName": first_name + " " + last_name,
+                            "ssn":ssn,
+                            "email": email,
+                            "phoneNumber": phone,
+                            "unemployedSince" : date
+                        }
+                    ]
+                const citizen_options = {
+                    method: `POST`,
+                    headers: myHeaders,
+                    body: JSON.stringify(citizen_data)
+                };
 
-        let date = document.getElementById("unemployed").value;
-        let citizen_data =
-            [
-                {
-                    "userName": first_name + " " + last_name,
-                    "ssn":ssn,
-                    "email": email,
-                    "phoneNumber": phone,
-                    "unemployedSince" : date
-                }
-            ]
-        const citizen_options = {
-            method: `POST`,
-            headers: myHeaders,
-            body: JSON.stringify(citizen_data)
-        };
-
-        fetch("http://localhost:8080/saveCitizen",citizen_options).then(data => {
-            if (!data.ok) {
-                throw data;
+                fetch("http://localhost:8080/saveCitizen",citizen_options).then(data => {
+                    if (!data.ok) {
+                        alert("You have already registered")
+                        throw data;
+                    }else{
+                        location.href = window.location.protocol + "//" + window.location.host + "/citizen";
+                    }
+                });
             }
         });
         register_form.reset();
     });
-</script>
-
-<script type="text/javascript">
-    document.getElementById("submit_button").onclick = function () {
-        location.href = window.location.protocol + "//" + window.location.host + "/citizen";
-    };
 </script>
 </body>
 
