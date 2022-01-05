@@ -1,6 +1,8 @@
 package gr.hua.freepass.models;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -29,8 +31,11 @@ public class Citizen {
         this.user = user;
     }
 
-    public Date getUnemployedSince() {
-        return unemployedSince;
+    public String getUnemployedSince() {
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String strDate = dateFormat.format(unemployedSince);
+        return strDate;
     }
 
     public void setUnemployedSince(Date unemployedSince) {

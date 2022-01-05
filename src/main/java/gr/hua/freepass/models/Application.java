@@ -1,10 +1,14 @@
 package gr.hua.freepass.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 @Table(name="Application")
-public class Application {
+public class Application implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,8 +16,16 @@ public class Application {
 
     @Column(unique = true)
     private String userName;
-
     private boolean isVerified;
+    private String unemployedSince;
+
+    public String getUnemployedSince() {
+        return this.unemployedSince;
+    }
+
+    public void setUnemployedSince(String unemployedSince) {
+        this.unemployedSince = unemployedSince;
+    }
 
     public int getApplication_id() {
         return application_id;

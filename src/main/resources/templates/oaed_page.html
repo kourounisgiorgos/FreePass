@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>admin</title>
+    <title>All Applications</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1> HELLO BOY ADMIN YES GOOD</h1>
+<section class="main-content">
+    <div class="container">
+        <h4>All Applications</h4>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Unemployed Since</th>
+                <th>Approve/Reject</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="fp_app : ${applications}">
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="user-info__basic">
+                            <h5 class="mb-0" th:text="${fp_app.userName}"></h5>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex align-items-baseline">
+                        <h4 class="mr-1" th:text="${fp_app.unemployedSince}"></h4><small class="text-success"/>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn--radius-2 btn--blue btn--pill">Approve/Reject</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

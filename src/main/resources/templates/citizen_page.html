@@ -67,12 +67,16 @@
         myHeaders.append("Content-Type", "application/json");
 
         let full_name = document.getElementById("full_name").value;
+        let unemployed = document.getElementById("unemployed").value;
+        console.log(unemployed)
+
 
         let app_data =
             [
                 {
                     "userName": full_name,
-                    "isVerified": "false"
+                    "isVerified": "false",
+                    "unemployedSince" : unemployed
                 }
             ]
 

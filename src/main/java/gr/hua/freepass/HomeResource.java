@@ -1,5 +1,6 @@
 package gr.hua.freepass;
 
+import gr.hua.freepass.models.Application;
 import gr.hua.freepass.models.Citizen;
 import gr.hua.freepass.models.MyUserDetails;
 import gr.hua.freepass.models.User;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -18,6 +21,9 @@ public class HomeResource {
 
     @Autowired
     CitizenRepository citizenRepo;
+
+    @Autowired
+    ApplicationRepository appRepo;
 
     @RequestMapping("/")
     public String home() {
@@ -38,8 +44,10 @@ public class HomeResource {
     }
 
     @RequestMapping("/oaed")
-    public String oaed() {
-        return ("oaed_page.html");
+    public String oaed(Model model) {
+        List<Application> allApplications = appRepo.findAll();
+        model.addAttribute("applications",allApplications);
+        return ("oaed_page");
     }
 
     @RequestMapping("/oasa")
