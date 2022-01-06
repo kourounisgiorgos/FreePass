@@ -14,6 +14,7 @@ public class Citizen {
     private String email;
     private String phoneNumber;
     private Date unemployedSince;
+    private String status;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,5 +81,13 @@ public class Citizen {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

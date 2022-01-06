@@ -47,6 +47,14 @@
                             <input type="text" id="ssn" th:value="${citizen.ssn}" readonly>
                         </div>
                     </div>
+                    <div class="col-2">
+                        <u class="label">Application Status</u>
+                        <td th:switch="${citizen.status}">
+                            <span th:case="waiting" style="color:#2E37FE">WAITING</span>
+                            <span th:case="rejected" style="color:#FF0000">REJECTED</span>
+                            <span th:case="accepted" style="color:#00FF00">ACCEPTED</span>
+                        </td>
+                    </div>
                 </div>
                 <div class="p-t-15">
                     <button id="submit_button" class="btn btn--radius-2 btn--blue" type="button">Submit Application</button>
@@ -67,15 +75,14 @@
         myHeaders.append("Content-Type", "application/json");
 
         let full_name = document.getElementById("full_name").value;
+        let ssn = document.getElementById("ssn").value;
         let unemployed = document.getElementById("unemployed").value;
-        console.log(unemployed)
-
 
         let app_data =
             [
                 {
                     "userName": full_name,
-                    "isVerified": "false",
+                    "ssn":ssn,
                     "unemployedSince" : unemployed
                 }
             ]

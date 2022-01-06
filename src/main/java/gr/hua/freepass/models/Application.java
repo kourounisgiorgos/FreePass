@@ -16,8 +16,16 @@ public class Application implements Serializable {
 
     @Column(unique = true)
     private String userName;
-    private boolean isVerified;
+    private String ssn;
     private String unemployedSince;
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
 
     public String getUnemployedSince() {
         return this.unemployedSince;
@@ -43,11 +51,4 @@ public class Application implements Serializable {
         this.userName = userName;
     }
 
-    public boolean isVerified() {
-        return isVerified;
-    }
-
-    public void setVerified(boolean verified) {
-        isVerified = verified;
-    }
 }

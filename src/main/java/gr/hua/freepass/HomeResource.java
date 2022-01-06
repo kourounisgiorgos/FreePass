@@ -25,6 +25,7 @@ public class HomeResource {
     @Autowired
     ApplicationRepository appRepo;
 
+
     @RequestMapping("/")
     public String home() {
         return ("register");
