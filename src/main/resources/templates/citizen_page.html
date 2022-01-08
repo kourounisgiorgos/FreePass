@@ -56,12 +56,26 @@
                         </td>
                     </div>
                 </div>
-                <div class="p-t-15">
-                    <button id="submit_button" class="btn btn--radius-2 btn--blue" type="button">Submit Application</button>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="p-t-15">
+                            <button id="submit_button" class="btn btn--radius-2 btn--blue" type="button">Submit Application</button>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <form th:action="@{/logout}" method="post">
+                            <div class="p-t-15">
+                                <button class="btn btn--radius-2 btn--blue" type="submit">Sign Out</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
+
 </div>
 
 <script>

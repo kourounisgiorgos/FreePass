@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
@@ -37,6 +37,11 @@
                             <button id="oaed_button" class="btn btn--radius-2 btn--blue" type="button">Add OAED Employee</button>
                         </div>
                     </div>
+                </form>
+                <br>
+                <br>
+                <form th:action="@{/logout}" id="sign_out" method="post">
+                    <a href="#" onclick="document.getElementById('sign_out').submit();">Sign Out</a>
                 </form>
             </div>
         </div>

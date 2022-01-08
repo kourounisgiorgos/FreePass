@@ -11,8 +11,14 @@
 </head>
 <body>
 <section class="main-content">
+    <a id="top"></a>
     <div class="container">
         <h4>All Applications</h4>
+
+
+        <form th:action="@{/logout}" method="post">
+            <button class="btn btn--radius-2 btn--blue" type="submit">Sign Out</button>
+        </form>
 
         <table class="table">
             <thead>
@@ -49,6 +55,10 @@
             </tr>
             </tbody>
         </table>
+
+        <form action="#top">
+            <button type="submit">Back to Top</button>
+        </form>
     </div>
 </section>
 
