@@ -6,6 +6,7 @@
 
 
 
+**API DOCUMENTATION**
 path="/saveApplication" , Method=POST , authentication=CITIZEN_ROLE
 Headers: Content-Type", "application/json"
 Body: {
