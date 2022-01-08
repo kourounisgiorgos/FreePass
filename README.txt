@@ -1,3 +1,10 @@
+**HOW TO RUN**
+Χρειαζεται να εχετε εγκατεστημενη την MySQL και να εχετε ενα ενεργο schema. Για να αναγνωριζει η εφαρμογη το schema σας
+πηγαινετε στο application.properties αρχειο και αλλαζετε τις μεταβλητες αναλογα με τα στοιχεια της βασης σας.
+Επειτε απλα πατα run και η εφαρμογη τρεχει στo port 8080.
+
+
+
 
 path="/saveApplication" , Method=POST , authentication=CITIZEN_ROLE
 Headers: Content-Type", "application/json"
