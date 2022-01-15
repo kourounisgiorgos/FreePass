@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Register to Free Pass</title>
@@ -68,9 +68,10 @@
                             <button id="submit_button" class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
                         </div>
                     </div>
-                    <a href="http://localhost:8080/citizen">Already Registered?</a>
-
                 </form>
+                <a th:href="@{/citizen}">Already Registered?</a>
+                <a th:href="@{/admin}">Are you an administrator?</a>
+                <a th:href="@{/oaed}">Are you an OAED employee?</a>
             </div>
         </div>
     </div>
@@ -78,6 +79,7 @@
 <script>
     let register_form = document.getElementById("register_form");
     register_form.addEventListener("submit", (event)=>{
+
 
         event.preventDefault();
         console.log("Post form submitted");
@@ -109,7 +111,7 @@
             body: JSON.stringify(user_data)
         };
 
-        fetch("http://localhost:8080/saveUser",options).then(data => {
+        fetch(window.location.href +"saveUser",options).then(data => {
             if (!data.ok) {
                 alert("You have already registered")
                 throw data;
@@ -132,7 +134,7 @@
                     body: JSON.stringify(citizen_data)
                 };
 
-                fetch("http://localhost:8080/saveCitizen",citizen_options).then(data => {
+                fetch(window.location.href +"saveCitizen",citizen_options).then(data => {
                     if (!data.ok) {
                         alert("You have already registered")
                         throw data;
@@ -144,6 +146,7 @@
         });
         register_form.reset();
     });
+
 </script>
 </body>
 

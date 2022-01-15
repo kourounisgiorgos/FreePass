@@ -14,7 +14,7 @@ public class ApplicationController {
     @Autowired
     ApplicationRepository appRepo;
 
-    @PostMapping(path="/saveApplication",consumes = {"application/json"})
+    @PostMapping(path="/citizen/saveApplication",consumes = {"application/json"})
     public void saveApplicationData(@RequestBody Application[] app){
 
         Application application = appRepo.findByUserName(app[0].getUserName());

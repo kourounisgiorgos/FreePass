@@ -290,6 +290,14 @@ h6 {
   background: #4272d7;
 }
 
+button.link {
+  background:none;
+  border:none;
+  font-size: 13px;
+  color:#3868cd;
+  text-decoration: underline;
+}
+
 .btn--blue:hover {
   background: #3868cd;
 }

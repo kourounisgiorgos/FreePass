@@ -15,6 +15,8 @@ public class Citizen {
     private String phoneNumber;
     private Date unemployedSince;
     private String status;
+    private String duration;
+    private String passCode;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +51,22 @@ public class Citizen {
 
     public int getId() {
         return citizen_id;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
     }
 
     public String getUserName() {

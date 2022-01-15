@@ -3,7 +3,7 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All Applications</title>
+    <title>All Approved Applications</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,7 +13,7 @@
 <section class="main-content">
     <a id="top"></a>
     <div class="container">
-        <h4>All Applications</h4>
+        <h4>Approved Applications</h4>
         <form th:action="@{/logout}" method="post">
             <button class="btn btn--radius-2 btn--blue" type="submit">Sign Out</button>
         </form>
@@ -22,33 +22,37 @@
             <thead>
             <tr>
                 <th>Citizen</th>
-                <th>Unemployed Since</th>
-                <th>SSN</th>
-                <th>Approve/Reject</th>
+                <th>Email</th>
+                <th>Duration</th>
+                <th>Generate</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="fp_app : ${applications}">
-                <td th:class="${fp_app.userName}">
+            <tr th:each="apCitizen : ${approved_citizens}">
+                <td th:class="${apCitizen.userName}">
                     <div class="d-flex align-items-center">
                         <div class="user-info__basic">
-                            <h5 class="mb-0" th:text="${fp_app.userName}"></h5>
+                            <h5 class="mb-0" th:text="${apCitizen.userName}"></h5>
                         </div>
                     </div>
                 </td>
                 <td>
                     <div class="d-flex align-items-baseline">
-                        <h5 class="mr-1" th:text="${fp_app.unemployedSince}"></h5>
+                        <h5 class="mr-1" th:text="${apCitizen.email}"></h5>
                     </div>
                 </td>
                 <td>
                     <div class="d-flex align-items-baseline">
-                        <h5 class="mr-2" th:text="${fp_app.ssn}"></h5>
+                        <select id="durations">
+                            <option>1 month</option>
+                            <option>6 months</option>
+                            <option>12 months</option>
+                            <option>24 months</option>
+                        </select>
                     </div>
                 </td>
                 <td>
-                    <button class="btn btn--radius-2 btn--blue btn--pill" id="approve">Approve</button>
-                    <button class="btn btn--radius-2 btn--blue btn--pill" id="reject">Reject</button>
+                    <button class="btn btn--radius-2 btn--blue btn--pill" id="create">Generate Pass</button>
                 </td>
             </tr>
             </tbody>
@@ -61,47 +65,40 @@
 </section>
 
 <script>
-    document.querySelectorAll("#approve").forEach(b => {
+    document.querySelectorAll("#create").forEach(b => {
         b.addEventListener("click", e => {
-            var myHeaders = new Headers();
+            let select = b.parentNode.parentNode.childNodes[5].firstElementChild.firstElementChild;
+            let pass_code= '';
+            let characters= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            for ( let i = 0; i < 12; i++ ) {
+                pass_code += characters.charAt(Math.floor(Math.random() *
+                    characters.length));
+            }
+
+            let myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
             const options = {
                 method: `PUT`,
                 headers: myHeaders,
-                body: "accepted"
+                body: pass_code+"-"+select.options[select.selectedIndex].value
             };
 
-            console.log(window.location.href +"/updateCitizen/"+ b.parentNode.parentNode.firstElementChild.classList[0] + " " +  b.parentNode.parentNode.firstElementChild.classList[1]);
-            fetch(window.location.href +"/updateCitizen/"+ b.parentNode.parentNode.firstElementChild.classList[0] + " " +  b.parentNode.parentNode.firstElementChild.classList[1],options).then(data => {
+
+
+            fetch(window.location.href +"/enableCitizenPass/"+ b.parentNode.parentNode.firstElementChild.classList[0] + " " +  b.parentNode.parentNode.firstElementChild.classList[1],options).then(data => {
                 if (!data.ok) {
                     throw data;
                 }else{
                     b.parentNode.parentNode.parentNode.removeChild(b.parentNode.parentNode);
+                    for ( let i = 0; i < 12; i++ ) {
+                        pass_code += characters.charAt(Math.floor(Math.random() *
+                            characters.length));
+                    }
                 }
             });
         });
 
-    });
-    document.querySelectorAll("#reject").forEach(b => {
-        b.addEventListener("click", e => {
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            const options = {
-                method: `PUT`,
-                headers: myHeaders,
-                body: "rejected"
-            };
-
-            fetch(window.location.href +"/updateCitizen/"+ b.parentNode.parentNode.firstElementChild.classList[0] + " " +  b.parentNode.parentNode.firstElementChild.classList[1],options).then(data => {
-                if (!data.ok) {
-                    throw data;
-                }else{
-                    b.parentNode.parentNode.parentNode.removeChild(b.parentNode.parentNode);
-                }
-            });
-        });
     });
 </script>
 

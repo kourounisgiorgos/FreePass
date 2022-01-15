@@ -58,9 +58,16 @@
                 </div>
                 <div class="row row-space">
                     <div class="col-2">
-                        <div class="p-t-15">
-                            <button id="submit_button" class="btn btn--radius-2 btn--blue" type="button">Submit Application</button>
-                        </div>
+                        <td th:switch="${citizen.status}">
+                            <div th:case="waiting" class="p-t-15">
+                                <button id="submit_button" class="btn btn--radius-2 btn--blue" type="button">Submit Application</button>
+                            </div>
+                            <div th:case="accepted" >
+                                <b><span th:if= "${citizen.passCode != null}" th:text="${citizen.passCode}"></span></b>
+                                <h6 th:if= "${citizen.passCode != null}">Please visit an OASA booth with <br> this code to enable your pass</h6>
+                                <h6 th:if= "${citizen.passCode == null}">Your request is being handled by OASA , please wait.</h6>
+                            </div>
+                        </td>
                     </div>
                     <div class="col-2">
                         <form th:action="@{/logout}" method="post">
@@ -70,8 +77,6 @@
                         </form>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -107,7 +112,7 @@
             body: JSON.stringify(app_data)
         };
 
-        fetch("http://localhost:8080/saveApplication",options).then(data => {
+        fetch(window.location.href +"/saveApplication",options).then(data => {
             if (!data.ok) {
                 alert("You have already submitted your application");
                 throw data;

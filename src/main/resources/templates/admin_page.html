@@ -14,7 +14,7 @@
         <div class="card card-4">
             <div class="card-body">
                 <h2 class="title">Admin Dashboard</h2>
-                <form id="register_form">
+                <form id="admin_form">
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
@@ -49,9 +49,9 @@
 </div>
 
 <script>
-    var oasa_button = document.getElementById("oasa_button");
-    var oaed_button = document.getElementById("oaed_button");
-
+    let oasa_button = document.getElementById("oasa_button");
+    let oaed_button = document.getElementById("oaed_button");
+    let admin_form = document.getElementById("admin_form");
 
 
     oasa_button.addEventListener("click", (event)=>{
@@ -79,12 +79,15 @@
             body: JSON.stringify(user_data)
         };
 
-        fetch("http://localhost:8080/saveUser",options).then(data => {
+        fetch(window.location.protocol + "//" + window.location.host + "/saveUser",options).then(data => {
             if (!data.ok) {
-                alert("User is already exists")
+                alert("User already exists")
                 throw data;
+            }else{
+                alert("Succesfully created OASA account");
             }
         });
+        admin_form.reset();
     });
 
     oaed_button.addEventListener("click", (event)=>{
@@ -112,12 +115,17 @@
             body: JSON.stringify(user_data)
         };
 
-        fetch("http://localhost:8080/saveUser",options).then(data => {
+        console.log(window.location.protocol + "//" + window.location.host + "saveUser");
+
+        fetch(window.location.protocol + "//" + window.location.host + "/saveUser",options).then(data => {
             if (!data.ok) {
-                alert("User is already exists")
+                alert("User already exists")
                 throw data;
+            }else{
+                alert("Succesfully created OAED account");
             }
         });
+        admin_form.reset();
     });
 </script>
 </body>

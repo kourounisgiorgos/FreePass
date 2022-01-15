@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeResource {
@@ -52,8 +53,15 @@ public class HomeResource {
     }
 
     @RequestMapping("/oasa")
-    public String oasa() {
-        return ("oaed_page.html");
+    public String oasa(Model model) {
+        List<Citizen> allCitizens = citizenRepo.findAll();
+
+        List<Citizen> cListFiltered = allCitizens.stream()
+                .filter(c -> c.getStatus().equals("Accepted") || c.getStatus().equals("accepted") && c.getDuration().isEmpty())
+                .collect(Collectors.toList());
+
+        model.addAttribute("approved_citizens",cListFiltered);
+        return ("oasa_page");
     }
 }
 

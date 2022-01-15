@@ -27,12 +27,22 @@ public class CitizenController {
         citizenRepo.save(citizen[0]);
     }
 
-    @PutMapping(value="/updateCitizen/{user_name}")
+    @PutMapping(value="/oaed/updateCitizen/{user_name}")
     public void updateCitizen(@RequestBody String status, @PathVariable String user_name){
         Citizen updateCitizen =citizenRepo.findByUserName(user_name);
         updateCitizen.setStatus(status);
         citizenRepo.save(updateCitizen);
 
         appRepo.delete(appRepo.findByUserName(user_name));
+    }
+
+    @PutMapping(value="/oasa/enableCitizenPass/{user_name}")
+    public void enableCitizenPass(@RequestBody String durationAndCode, @PathVariable String user_name){
+        String[] parts = durationAndCode.split("-");
+
+        Citizen updateCitizen =citizenRepo.findByUserName(user_name);
+        updateCitizen.setDuration(parts[1]);
+        updateCitizen.setPassCode(parts[0]);
+        citizenRepo.save(updateCitizen);
     }
 }
