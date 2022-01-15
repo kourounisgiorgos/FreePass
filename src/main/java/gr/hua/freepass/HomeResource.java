@@ -57,7 +57,7 @@ public class HomeResource {
         List<Citizen> allCitizens = citizenRepo.findAll();
 
         List<Citizen> cListFiltered = allCitizens.stream()
-                .filter(c -> c.getStatus().equals("Accepted") || c.getStatus().equals("accepted") && c.getDuration().isEmpty())
+                .filter(c -> c.getStatus().equals("Accepted") || c.getStatus().equals("accepted") && c.getDuration() == null)
                 .collect(Collectors.toList());
 
         model.addAttribute("approved_citizens",cListFiltered);
