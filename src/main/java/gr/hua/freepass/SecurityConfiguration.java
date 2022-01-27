@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/citizen").hasRole("CITIZEN")
                 .antMatchers("/oasa").hasRole("OASA")
                 .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/error").hasAnyRole("OAED","CITIZEN","OASA","ADMIN")
                 .antMatchers("/").permitAll()
                 .and().formLogin()
                 .and().logout().logoutSuccessUrl("/");
