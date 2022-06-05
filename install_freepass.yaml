@@ -14,4 +14,4 @@
 
     - name: Build and run FreePass
       ansible.builtin.shell:
-        cmd: cd FreePass; mvn package -DskipTests; java -jar target/freepass-0.0.1-SNAPSHOT.jar
+        cmd: pwd; cd FreePass; mvn package -DskipTests; java -jar target/freepass-0.0.1-SNAPSHOT.jar
