@@ -1,4 +1,4 @@
-FROM alpine
-RUN apk -U upgrade; apk add openjdk11-jdk maven git; git clone https://github.com/kourounisgiorgos/FreePass.git;cd FreePass; mvn package -DskipTests;
+FROM openjdk:11-jdk
+COPY target/FreePass.jar FreePass.jar
 EXPOSE 8080
-CMD ["java", "-jar", "/FreePass/target/freepass-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/FreePass.jar"]
