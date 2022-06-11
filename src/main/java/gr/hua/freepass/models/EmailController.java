@@ -11,7 +11,7 @@ public final class EmailController {
 
     public static void sendEmail(String to, String subject, String text) throws MessagingException {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("127.0.0.1");
+        mailSender.setHost("mailserver");
         mailSender.setProtocol("smtp");
         mailSender.setPort(1025);
         mailSender.setPassword("");
